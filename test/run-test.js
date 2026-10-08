@@ -10,11 +10,12 @@ try {
   const scriptPath = path.resolve('bin/index.js');
   
   execSync(
-    `node "${scriptPath}" --yes --name "SampleService" --description "Testing bootstrap" --stack "Go (Golang)" --test "go test" --target "${tempDir}"`,
+    `node "${scriptPath}" --yes --name "AuthService" --description "NextGen Auth" --problem "Token theft" --persona "SecOps" --features "OAuth3,Biometrics" --non-goals "Password recovery" --stack "Rust / Axum" --test "cargo test" --target "${tempDir}"`,
     { stdio: 'inherit' }
   );
 
   const expectedFiles = [
+    path.join('docs', 'PRD.md'),
     'AGENTS.md',
     path.join('.agents', 'skills', 'sprint-manager', 'SKILL.md'),
     path.join('.agents', 'skills', 'project-kickoff', 'SKILL.md'),
@@ -30,8 +31,13 @@ try {
     console.log(`Verified existence of ${rel}`);
   }
 
+  const prdContent = fs.readFileSync(path.join(tempDir, 'docs', 'PRD.md'), 'utf-8');
+  if (!prdContent.includes('Token theft') || !prdContent.includes('OAuth3')) {
+    throw new Error('PRD does not contain expected dynamic parameters');
+  }
+
   const agentsMdContent = fs.readFileSync(path.join(tempDir, 'AGENTS.md'), 'utf-8');
-  if (!agentsMdContent.includes('SampleService') || !agentsMdContent.includes('go test')) {
+  if (!agentsMdContent.includes('AuthService') || !agentsMdContent.includes('cargo test')) {
     throw new Error('AGENTS.md does not contain expected dynamic stack parameters');
   }
 
