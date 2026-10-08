@@ -1,0 +1,27 @@
+{
+  "name": "agy-init",
+  "version": "1.0.0",
+  "description": "Universal project-agnostic Antigravity & Claude Code bootstrap generator",
+  "main": "bin/index.js",
+  "bin": {
+    "agy-init": "./bin/index.js"
+  },
+  "type": "module",
+  "scripts": {
+    "start": "node bin/index.js",
+    "test": "node test/run-test.js"
+  },
+  "keywords": [
+    "antigravity",
+    "claude-code",
+    "agentic-ai",
+    "bootstrap",
+    "scaffolding",
+    "agents-md"
+  ],
+  "author": "Dr. OpenSource",
+  "license": "MIT",
+  "engines": {
+    "node": ">=18.0.0"
+  }
+}
